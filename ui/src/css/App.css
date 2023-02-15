@@ -1,0 +1,10 @@
+
+* {
+    font-weight: 100;
+    letter-spacing: 0.01rem;
+}
+
+.Instance-component {
+    max-width: 31em;
+    margin: 20px;
+}
