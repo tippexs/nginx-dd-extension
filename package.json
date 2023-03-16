@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@monaco-editor/react": "^4.4.6",
+    "@uiw/react-monacoeditor": "^3.5.7",
+    "monaco-editor-nginx": "^1.0.12"
+  }
+}

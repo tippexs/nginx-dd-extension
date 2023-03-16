@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import ReactEditor from "react-simple-code-editor";
 import "./prism-nginx.css";
 import "./prism-nginx.js";
+// @ts-ignore
+import MonacoEditor from "@uiw/react-monacoeditor";
 
 // This component makes use of Reacts Lifting State Up functionality. Read more about it
 // here: https://reactjs.org/docs/lifting-state-up.html
@@ -21,24 +23,35 @@ export function Editor(props: EditorProps) {
     }
 
     return (
-        <ReactEditor
-            value={props.fileContent}
-            className={"nginx-config-editor"}
-            onValueChange={handleChange}
-            highlight={
-                configurationFileContent => highlight(props.fileContent, languages.nginx, "bash")
-                    .split("\n")
-                    .map((line, i) => `<span class='editorLineNumber' key=${i}>${i + 1}</span>${line}`)
-                    .join('\n')
-            }
-            padding={10}
-            style={{
-                ...props.style,
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 14,
-                whiteSpace: "pre",
-                outline: 0,
-            }}
-        />
+        <>
+            <MonacoEditor
+                theme="nginx-theme"
+                language="nginx"
+                value={props.fileContent}
+                height="100vh"
+                options={{
+                    theme: 'vs-dark',
+                }}
+            />
+            <ReactEditor
+                value={props.fileContent}
+                className={"nginx-config-editor"}
+                onValueChange={handleChange}
+                highlight={
+                    configurationFileContent => highlight(props.fileContent, languages.nginx, "bash")
+                        .split("\n")
+                        .map((line, i) => `<span class='editorLineNumber' key=${i}>${i + 1}</span>${line}`)
+                        .join('\n')
+                }
+                padding={10}
+                style={{
+                    ...props.style,
+                    fontFamily: '"Fira code", "Fira Mono", monospace',
+                    fontSize: 14,
+                    whiteSpace: "pre",
+                    outline: 0,
+                }}
+            />
+        </>
     )
 }
